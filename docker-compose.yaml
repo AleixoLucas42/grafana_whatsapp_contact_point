@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  grafana2whatsapp:
+    image: aleixolucas/grafana2whatsapp:latest
+    container_name: grafana2whatsapp
+    deploy:
+      resources:
+        limits:
+          cpus: '.1'
+          memory: 100M
+        reservations:
+          cpus: '.01'
+          memory: 50M
+    environment:
+      - WHATSAPP_API_URL=https://whatsapp-bot.aleixohome.lan/client/sendMessage/DISC_WPP_SESSION
+      - CHAT_ID=120363201509693074@g.us
+    ports:
+      - 5000:5000
+#     networks:
+#       - swarm-net
+# networks:
+#   swarm-net:
+#     external: true
