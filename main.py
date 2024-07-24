@@ -7,7 +7,11 @@ wpp_url = os.environ["WHATSAPP_API_URL"]
 chat_id = os.environ["CHAT_ID"]
 
 def send_notification(alert):
-    content = f"⚠️ {alert['name']}\n🚨 {alert['status']}\n🌐 {alert['dashboard']}"
+    if alert['status'] == "firing":
+        status_emoji = "🚨"
+    else:
+        status_emoji = "✅"
+    content = f"⚠️ {alert['name']}\n{status_emoji} {alert['status']}\n🌐 {alert['dashboard']}"
     payload = json.dumps({
         "chatId": chat_id,
         "contentType": "string",
