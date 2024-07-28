@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   grafana2whatsapp:
-    image: aleixolucas/grafana2whatsapp:latest
+    image: aleixolucas/grafana_whatsapp_contact_point:latest
     container_name: grafana2whatsapp
     deploy:
       resources:
