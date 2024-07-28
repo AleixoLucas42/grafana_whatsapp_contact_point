@@ -11,7 +11,7 @@ def send_notification(alert):
         status_emoji = "🚨"
     else:
         status_emoji = "✅"
-    content = f"⚠️ {alert['name']}\n{status_emoji} {alert['status']}\n🌐 {alert['dashboard']}"
+    content = f"📌 {alert['name']}\n{status_emoji} {alert['status']}\n🌐 {alert['dashboard']}"
     payload = json.dumps({
         "chatId": chat_id,
         "contentType": "string",
