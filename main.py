@@ -22,7 +22,7 @@ def send_notification(alert):
     }
     response = requests.request("POST", wpp_url, headers=headers, data=payload, verify=False)
     if response.status_code == 200:
-        print("> whatsapp message sent")
+        print("[+] whatsapp message sent")
     else:
         print(f"Error {response.status_code} sending message\n")
         print(response.text)
@@ -37,13 +37,13 @@ def webhook():
     alert["name"] = data['alerts'][0]['labels']['alertname']
     alert["status"] = data['alerts'][0]['status']
     alert["dashboard"] = data['alerts'][0]['dashboardURL']
-    print(f"> received alert")
+    print(f"[*] received alert")
     print(alert)
     try:
         send_notification(alert)
-        return "notification sent"
+        return "[+] notification sent"
     except Exception as e:
-        print(f"> error, {e}")
+        print(f"[!] error, {e}")
     
 
 app.run(host="0.0.0.0", port=5000)
