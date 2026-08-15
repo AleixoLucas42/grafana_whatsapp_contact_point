@@ -34,16 +34,20 @@ CORS(app, resources={r"*": {"origins": "*"}})
 def webhook():
     alert = {}
     data = request.json
+    
     alert["name"] = data['alerts'][0]['labels']['alertname']
-    alert["status"] = data['alerts'][0]['status']
-    alert["dashboard"] = data['alerts'][0]['dashboardURL']
+    alert["dashboard"] = data['alerts'][0].get('dashboardURL', '')
+    
+    alert["status"] = data.get('status', 'firing') 
+    
     print(f"[*] received alert")
     print(alert)
+    
     try:
         send_notification(alert)
         return "[+] notification sent"
     except Exception as e:
         print(f"[!] error, {e}")
-    
+        return jsonify({"error": str(e)}), 500   
 
 app.run(host="0.0.0.0", port=5000)
